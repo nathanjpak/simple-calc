@@ -74,6 +74,21 @@ operationsButtons.forEach(button => {
     });
 });
 
+//function for equal button
+const equal = document.getElementById("equal");
+equal.addEventListener("click", function() {
+    let operation = document.getElementsByClassName("selected")[0].getAttribute("id");
+    if ((storage) && (operation) && ((display.textContent.charAt(0) !== "\n"))) {
+        console.log(storage);
+        console.log(operation);
+        console.log(display.textContent);
+        const result = operate(operation, storage, display.textContent);
+        console.log(result);
+        display.textContent = `\n${result}`;
+        operationsButtons.forEach(button => button.classList.remove("selected"));
+    }
+});
+
 //functions for operations
 function add(a, b) {
     return a + b;
@@ -92,7 +107,14 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
-    return operator(a,b);
+    a = Number(a);
+    b = Number(b);
+    switch (operator) {
+        case "add": return add(a,b); break;
+        case "subtract": return subtract(a,b); break;
+        case "multiply": return multiply(a,b); break;
+        case "divide": return divide(a,b); break;
+    }
 }
 
 
