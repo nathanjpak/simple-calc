@@ -12,6 +12,7 @@ for (i=9; i>=0; i--) {
 
 const decimal = document.createElement("button");
 decimal.classList.add("miscButtons");
+decimal.setAttribute("id", "decimal")
 decimal.textContent = ".";
 divNumbers.insertBefore(decimal, document.getElementById("0"));
 
@@ -42,16 +43,34 @@ operations.forEach(name => {
     divOperations.appendChild(newButton);    
 });
 
-//functions for buttons
+//functions for number buttons
 const display = document.getElementById("display");
 const numberButtons = Array.from(document.getElementsByClassName("numbers"));
+numberButtons.push(decimal);
 
 numberButtons.forEach(button => {
     button.addEventListener("click", function(e) {
         if (display.textContent.charAt(0) === "\n") {
             display.textContent = "";
         };
-        display.textContent += `${e.target.getAttribute("id")}`;
+        display.textContent += `${e.target.textContent}`;
+    });
+});
+
+//functions for operations buttons
+let operationSelected = false;
+let storage = "";
+const operationsButtons = Array.from(document.getElementsByClassName("operations"));
+
+operationsButtons.forEach(button => {
+    button.addEventListener("click", function(e) {
+        storage = display.textContent;
+        display.textContent = `\n` + display.textContent;
+        if (operationSelected = true) {
+            operationsButtons.forEach(button => button.classList.remove("selected"));
+        }
+        operationSelected = true;
+        e.target.classList.add("selected");
     });
 });
 
