@@ -19,7 +19,6 @@ divNumbers.insertBefore(decimal, document.getElementById("0"));
 
 const operations = ["divide", "multiply", "subtract", "add", "equal"]
 operations.forEach(name => {
-    console.log(name);
     const newButton = document.createElement("button");
     newButton.classList.add("operations");
     newButton.setAttribute("id", `${name}`);
@@ -38,8 +37,22 @@ operations.forEach(name => {
             break;
         default:
             newButton.textContent = "=";
+            newButton.classList.remove("operations");
     }
     divOperations.appendChild(newButton);    
+});
+
+//functions for buttons
+const display = document.getElementById("display");
+const numberButtons = Array.from(document.getElementsByClassName("numbers"));
+
+numberButtons.forEach(button => {
+    button.addEventListener("click", function(e) {
+        if (display.textContent.charAt(0) === "\n") {
+            display.textContent = "";
+        };
+        display.textContent += `${e.target.getAttribute("id")}`;
+    });
 });
 
 //functions for operations
