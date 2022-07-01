@@ -66,3 +66,7 @@
 .selected {
     background-color: yellow;
 }
+
+.disabled {
+    opacity: 0.65;
+}

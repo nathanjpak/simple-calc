@@ -12,9 +12,15 @@ for (i=9; i>=0; i--) {
 
 const decimal = document.createElement("button");
 decimal.classList.add("miscButtons");
-decimal.setAttribute("id", "decimal")
+decimal.setAttribute("id", "decimal");
 decimal.textContent = ".";
 divNumbers.insertBefore(decimal, document.getElementById("0"));
+
+const clear = document.createElement("button");
+clear.classList.add("miscButtons");
+clear.setAttribute("id", "clear");
+clear.textContent = "AC";
+divNumbers.appendChild(clear);
 
 //create buttons for operations
 
@@ -46,7 +52,6 @@ operations.forEach(name => {
 //functions for number buttons
 const display = document.getElementById("display");
 const numberButtons = Array.from(document.getElementsByClassName("numbers"));
-numberButtons.push(decimal);
 
 numberButtons.forEach(button => {
     button.addEventListener("click", function(e) {
@@ -55,6 +60,14 @@ numberButtons.forEach(button => {
         };
         display.textContent += `${e.target.textContent}`;
     });
+});
+
+//separate function for decimal
+decimal.addEventListener("click", function(e) {
+    if (decimal.classList.length !== 2) {
+        (display.textContent.charAt(0) === "\n") ? display.textContent = "0." : display.textContent += ".";
+        decimal.classList.add("disabled");
+    };
 });
 
 //functions for operations buttons
@@ -66,6 +79,7 @@ operationsButtons.forEach(button => {
     button.addEventListener("click", function(e) {
         storage = display.textContent;
         display.textContent = `\n` + display.textContent;
+        decimal.classList.remove("disabled");
         if (operationSelected = true) {
             operationsButtons.forEach(button => button.classList.remove("selected"));
         }
@@ -86,8 +100,20 @@ equal.addEventListener("click", function() {
         console.log(result);
         display.textContent = `\n${result}`;
         operationsButtons.forEach(button => button.classList.remove("selected"));
+        decimal.classList.remove("disabled");
+    } else {
+        alert("Error!");
     }
 });
+
+//function for clear button
+clear.addEventListener("click", function() {
+    operationSelected = false;
+    operationsButtons.forEach(button => button.classList.remove("selected"));
+    decimal.classList.remove("disabled");
+    display.textContent = "\n0";
+    storage = "";
+})
 
 //functions for operations
 function add(a, b) {
