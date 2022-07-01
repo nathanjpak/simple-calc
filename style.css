@@ -1,0 +1,64 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    background-color: #8d7dff;
+    height: 400px;
+    width: 300px;
+}
+
+#display {
+    color: white;
+    background-color: black;
+    height: 100px;
+    width: 80%;
+    align-self: center;
+    margin: 10px;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+#numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-rows: repeat(4, 1fr);
+    direction: rtl;
+    width: 75%;
+    height: max-content;
+    padding: 10px;
+}
+
+#operations {
+    display: flex;
+    flex-direction: column;
+    min-width: 20%;
+    padding: 10px;
+    justify-content: space-evenly;
+}
+
+.numbers {
+    border-radius: 5px;
+    background-color: red;
+    height: 50px;
+}
+
+.miscButtons {
+    border-radius: 5px;
+    background-color: orange;
+    height: 50px;
+}
+
+.operations {
+    border-radius: 5px;
+    height: 30px;
+    background-color: lightgreen;
+}
+
+#equal {
+    height: 45px;
+    background-color: blue;
+}
